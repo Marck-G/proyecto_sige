@@ -1,19 +1,28 @@
 <odoo>
   <data>
-    <!-- explicit list view definition -->
-    <!--
+    <!-- para las empresas, list view -->
     <record model="ir.ui.view" id="proyecyo.list">
-      <field name="name">proyecyo list</field>
-      <field name="model">proyecyo.proyecyo</field>
+      <field name="name">Lista de Empresa</field>
+      <field name="model">centro.empresa</field>
       <field name="arch" type="xml">
         <tree>
           <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
+          <field name="direccion"/>
         </tree>
       </field>
     </record>
-    -->
+    <!-- para los alumnos -->
+    <record model="ir.ui.view" id="proyecyo.list">
+      <field name="name">Lista de Empresa</field>
+      <field name="model">centro.empresa</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="direccion"/>
+        </tree>
+      </field>
+    </record>
+
 
     <!-- actions opening views on models -->
     <!--

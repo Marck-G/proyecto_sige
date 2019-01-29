@@ -3,8 +3,8 @@
 from odoo import models, fields, api
 
 class centro_empresa( models.Model ):
-    _name   = 'centro.empresa'
-    name    = fields.Text(string="Nombre", required=True)
+    _name = 'centro.empresa'
+    name = fields.Text(string="Nombre", required=True)
     direccion = fields.Text()
     alumnos = fields.One2many('centro.alumno')
 
@@ -16,13 +16,13 @@ class centro_alumno( models.Model ):
     naci = fields.Date( string="Fecha Nacimiento", required=True )
     ciclo = fields.Selection( [ ('dam', 'DAM'), ('daw', 'DAW'), ('asir','ASIR') ], string="Ciclo Formativo" );
     nota = fields.Float( string="Nota Media" )
-    def _nota_media_text_(self, _nota):
+    def _nota_media_text_(self):
         """ Devuelve el texto correspondiente a la nota media """
-        if 5 <= _nota <= 7 :
+        if 5 <= self.nota <= 7 :
             return "Aprobado"
-        if 7 < _nota <= 9:
+        if 7 < self.nota <= 9:
             return "Notable"
-        if 9 < _nota <= 10:
+        if 9 < self.nota <= 10:
             return "Sobresaliente"
         else:
             return "Suspendido"
