@@ -1,12 +1,5 @@
 # -*- coding: utf-8 -*-
-
-from odoo import models, fields
-
-class Empresa ( models.Model ):
-    _name = 'empresa.empresa'
-    name = fields.Text(string="Nombre", required=True)
-    direccion = fields.Text()
-    alumnos = fields.One2many('centro.alumno', inverse_name='empresa')
+from odoo import  models, fields
 
 class Alumno ( models.Model ):
     _name = "centro.alumno"
@@ -17,7 +10,7 @@ class Alumno ( models.Model ):
     ciclo = fields.Selection( [ ('dam', 'DAM'), ('daw', 'DAW'), ('asir','ASIR') ], string="Ciclo Formativo" )
     nota = fields.Float( string="Nota Media" )
     empresa = fields.Many2one( "centro.empresa", store=True, string="Empresa de prácticas" )
-    # tutor = fields.Many2one( "centro.tutor", string="Tutor de prácticas" )
+    tutor = fields.Many2one( "centro.tutor", string="Tutor de prácticas" )
     def _nota_media_text_(self):
         """ Devuelve el texto correspondiente a la nota media """
         if 5 <= self.nota <= 7 :

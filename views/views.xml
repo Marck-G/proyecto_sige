@@ -1,9 +1,9 @@
 <odoo>
   <data>
     <!-- para las empresas, list view -->
-    <record model="ir.ui.view" id="proyecyo.list">
-      <field name="name">Lista de Empresa</field>
-      <field name="model">centro.empresa</field>
+    <record model="ir.ui.view" id="empresa">
+      <field name="name">centro_empresa</field>
+      <field name="model">empresa.empresa</field>
       <field name="arch" type="xml">
         <tree>
           <field name="name"/>
@@ -12,26 +12,32 @@
       </field>
     </record>
     <!-- para los alumnos -->
-    <record model="ir.ui.view" id="proyecyo.list">
-      <field name="name">Lista de Empresa</field>
-      <field name="model">centro.empresa</field>
+    <record model="ir.ui.view" id="alumno">
+      <field name="name">centro_alumno</field>
+      <field name="model">centro.alumno</field>
       <field name="arch" type="xml">
         <tree>
           <field name="name"/>
-          <field name="direccion"/>
+          <field name="ape1"/>
+          <field name="ciclo"/>
+          <field name="nota"/>
         </tree>
       </field>
     </record>
 
 
     <!-- actions opening views on models -->
-    <!--
-    <record model="ir.actions.act_window" id="proyecyo.action_window">
-      <field name="name">proyecyo window</field>
-      <field name="res_model">proyecyo.proyecyo</field>
+    <record model="ir.actions.act_window" id="empresa_w">
+      <field name="name">Empresas</field>
+      <field name="res_model">empresa.empresa</field>
       <field name="view_mode">tree,form</field>
     </record>
-    -->
+
+     <record model="ir.actions.act_window" id="alumno_w">
+      <field name="name">Alumnos</field>
+      <field name="res_model">centro.alumno</field>
+      <field name="view_mode">tree,form</field>
+    </record>
 
     <!-- server action to the one above -->
     <!--
@@ -50,18 +56,12 @@
     -->
 
     <!-- Top menu item -->
-    <!--
-    <menuitem name="proyecyo" id="proyecyo.menu_root"/>
-    -->
+    <menuitem name="Proyecto" id="proyecto_root"/>
     <!-- menu categories -->
+    <menuitem name="Empresas" id="proyecto_1" parent="proyecto_root"  action="empresa_w"/>/>
+    <menuitem name="Alumnos" id="proyecto_2" parent="proyecto_root" action="alumno_w"/> />
+
     <!--
-    <menuitem name="Menu 1" id="proyecyo.menu_1" parent="proyecyo.menu_root"/>
-    <menuitem name="Menu 2" id="proyecyo.menu_2" parent="proyecyo.menu_root"/>
-    -->
-    <!-- actions -->
-    <!--
-    <menuitem name="List" id="proyecyo.menu_1_list" parent="proyecyo.menu_1"
-              action="proyecyo.action_window"/>
     <menuitem name="Server to list" id="proyecyo" parent="proyecyo.menu_2"
               action="proyecyo.action_server"/>
     -->
