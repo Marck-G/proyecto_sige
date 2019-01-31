@@ -1,18 +1,32 @@
 <odoo>
   <data>
     <!-- para las empresas, list view -->
-    <record model="ir.ui.view" id="empresa">
+    <record model="ir.ui.view" id="empresa_tree">
       <field name="name">centro_empresa</field>
       <field name="model">empresa.empresa</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="name"/>
-          <field name="direccion"/>
+          <field name="name" string="Nombre de la empresa"/>
+          <field name="direccion" string="Dirección"/>
         </tree>
       </field>
     </record>
+
+    <record model="ir.ui.view" id="empresa_form">
+      <field name="name">Nueva Empresa</field>
+      <field name="model">empresa.empresa</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="name"/>
+            <field name="direccion"/>
+            <field name="alumnos" options="{ 'no_create':True }"/>
+          </group>
+        </form>
+      </field>
+    </record>
     <!-- para los alumnos -->
-    <record model="ir.ui.view" id="alumno">
+    <record model="ir.ui.view" id="alumno_tree">
       <field name="name">centro_alumno</field>
       <field name="model">centro.alumno</field>
       <field name="arch" type="xml">
@@ -21,23 +35,89 @@
           <field name="ape1"/>
           <field name="ciclo"/>
           <field name="nota"/>
+          <field name="text"/>
+          <field name="empresa"/>
+          <field name="tutor"/>
         </tree>
       </field>
     </record>
 
+    <record model="ir.ui.view" id="alumno_form">
+      <field name="name">Añadir Alumno</field>
+      <field name="model">centro.alumno</field>
+      <field name="arch" type="xml">
+        <form>
+            <group name="c_main">
+              <group name="datos">
+                <field name="name"/>
+                <field name="ape1"/>
+                <field name="ape2"/>
+                <field name="naci"/>
+              </group>
+              <group name="c_ciclo">
+                <field name="ciclo"/>
+                <field name="nota"/>
+                <field name="empresa" widget="selection" options="{'no_create':True}"/>
+                <field name="tutor" widget="selection" options="{'no_create':True}"/>
+              </group>
+            </group>
+        </form>
+      </field>
+    </record>
 
-    <!-- actions opening views on models -->
+    <!--TUTORES-->
+    <record model="ir.ui.view" id="tutor_tree">
+      <field name="name">centro_tutor</field>
+      <field name="model">centro.tutor</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="tutor_form">
+      <field name="name">Añadir Tutor</field>
+      <field name="model">centro.tutor</field>
+      <field name="arch" type="xml">
+        <form>
+            <group name="c_main">
+              <group name="datos">
+                <field name="name"/>
+                <field name="alumnos" widget="many2many" options="{'no_create':True}">
+                        <tree>
+                          <field name="name"/>
+                          <field name="ape1"/>
+                          <field name="nota"/>
+                          <field name="empresa"/>
+                        </tree>
+                </field>
+              </group>
+            </group>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- ACCIONES -->
     <record model="ir.actions.act_window" id="empresa_w">
       <field name="name">Empresas</field>
       <field name="res_model">empresa.empresa</field>
       <field name="view_mode">tree,form</field>
     </record>
-
-     <record model="ir.actions.act_window" id="alumno_w">
+    <record model="ir.actions.act_window" id="alumno_w">
       <field name="name">Alumnos</field>
       <field name="res_model">centro.alumno</field>
       <field name="view_mode">tree,form</field>
     </record>
+
+     <record model="ir.actions.act_window" id="tutor_w">
+      <field name="name">Tutor</field>
+      <field name="res_model">centro.tutor</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
 
     <!-- server action to the one above -->
     <!--
@@ -54,12 +134,13 @@
       </field>
     </record>
     -->
-
+    <!-- *_________ MENUS _______________*-->
     <!-- Top menu item -->
-    <menuitem name="Proyecto" id="proyecto_root"/>
+    <menuitem name="Instituo" id="proyecto_root"/>
     <!-- menu categories -->
-    <menuitem name="Empresas" id="proyecto_1" parent="proyecto_root"  action="empresa_w"/>/>
-    <menuitem name="Alumnos" id="proyecto_2" parent="proyecto_root" action="alumno_w"/> />
+    <menuitem name="Empresas" id="proyecto_1" parent="proyecto_root"  action="empresa_w"/>
+    <menuitem name="Alumnos" id="proyecto_2" parent="proyecto_root" action="alumno_w"/>
+    <menuitem name="Tutores" id="proyecto_3" parent="proyecto_root" action="tutor_w"/>
 
     <!--
     <menuitem name="Server to list" id="proyecyo" parent="proyecyo.menu_2"
