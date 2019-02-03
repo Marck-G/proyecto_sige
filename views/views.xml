@@ -142,9 +142,9 @@
     <menuitem name="Alumnos" id="proyecto_2" parent="proyecto_root" action="alumno_w"/>
     <menuitem name="Tutores" id="proyecto_3" parent="proyecto_root" action="tutor_w"/>
 
-    <!--
-    <menuitem name="Server to list" id="proyecyo" parent="proyecyo.menu_2"
-              action="proyecyo.action_server"/>
-    -->
+    <template id="reporte_alumno">
+
+
+    </template>
   </data>
 </odoo>

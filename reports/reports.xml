@@ -1,0 +1,43 @@
+<data>
+    <report id="reporte_alumnos"
+            string="Imprimir listado"
+            model="centro.alumno"
+            report_type="qweb-pdf"
+            name="proyecto_sige.report_alumnos_tmplate"
+            file="proyecto_sige.report_alumnos_tmplate"
+            />
+    <template id="report_alumnos_tmplate">
+        <t t-call="report.html_container">
+
+                <t t-call="report.external_layout">
+                    <div class="page">
+                        <h1>Alumnos</h1>
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Fecha nacimiento</th>
+                                    <th>Nota</th>
+                                    <th>Tutor</th>
+                                    <th>Empresa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-forech="docs" t-as="alu">
+                                    <tr>
+                                        <td> <span t-field="alu.name"></span></td>
+                                        <td> <span t-field="alu.ape1"></span></td>
+                                        <td> <span t-field="alu.naci"></span></td>
+                                        <td> <span t-field="alu.text"></span></td>
+                                        <td> <span t-field="alu.tutor.name"></span></td>
+                                        <td> <span t-field="alu.empresa.name"></span></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+        </t>
+    </template>
+</data>
